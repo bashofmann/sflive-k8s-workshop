@@ -1,5 +1,5 @@
 const express = require('express');
-const randomQuote = require('random-quote');
+const stoicapi = require("stoic-api");
 const promBundle = require("express-prom-bundle");
 
 const app = express();
@@ -17,13 +17,13 @@ app.get('/health', (req, res) => {
 });
 
 app.get('/quote', (req, res) => {
-    randomQuote()
-        .then(quote => {
-          quotesTotal.inc();
-          quote[0].title = quote[0].title.toUpperCase();
-            res.send(quote);
-        })
-        .catch(err => res.send(err));
+  const quote = {
+    title: 'This is a random quote',
+    description: stoicapi.random(),
+  };
+  quote.title = quote.title.toUpperCase();
+  quotesTotal.inc();
+  res.send([quote]);
 });
 
 const port = 3000;
