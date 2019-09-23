@@ -2,6 +2,7 @@
 
 ## Everyone 
 
+* Run `apply-your-name.sh` and provide unique string for placeholders
 * Download kubeconfig
 * Copy kubeconfig to `~/.kube/config`
 * Install kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl/
