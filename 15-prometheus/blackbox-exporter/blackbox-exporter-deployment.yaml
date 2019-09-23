@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blackbox-exporter
+  template:
+    metadata:
+      labels:
+        app: blackbox-exporter
+    spec:
+      containers:
+        - image: prom/blackbox-exporter:v0.15.1
+          name: blackbox-exporter
+          volumeMounts:
+            - mountPath: /etc/blackbox_exporter
+              name: blackbox-exporter-config
+          ports:
+            - containerPort: 9115
+              name: metrics
+      volumes:
+        - name: blackbox-exporter-config
+          configMap:
+            name: blackbox-exporter-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+  labels:
+    app: blackbox-exporter
+spec:
+  ports:
+    - name: metrics
+      port: 9115
+      targetPort: metrics
+      protocol: TCP
+  selector:
+    app: blackbox-exporter

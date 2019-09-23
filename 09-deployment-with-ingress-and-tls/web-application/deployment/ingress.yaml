@@ -1,0 +1,21 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: web-application
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "20m"
+  labels:
+    app: web-application
+    workshop: workshop
+spec:
+  tls:
+    - hosts:
+        - web-application-<YOURNAME>.sflive.plgrnd.be
+  rules:
+    - host: web-application-<YOURNAME>.sflive.plgrnd.be
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web-application
+              servicePort: 80

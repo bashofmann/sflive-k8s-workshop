@@ -1,0 +1,3 @@
+image:
+  tag: 8.5.0
+replicaCount: 2

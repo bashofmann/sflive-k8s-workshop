@@ -1,0 +1,5 @@
+image:
+  repository: quay.io/jetstack/cert-manager-controller
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
