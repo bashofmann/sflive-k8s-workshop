@@ -19,6 +19,8 @@ FROM composer:1.9.0 AS composer
 WORKDIR /var/www/html
 
 COPY composer.* /var/www/html/
+COPY symfony.lock /var/www/html/
+
 RUN composer install
 
 # Build nginx image
